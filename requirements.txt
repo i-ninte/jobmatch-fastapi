@@ -6,3 +6,5 @@ passlib[bcrypt]
 python-dotenv 
 python-jose 
 google-generativeai
+requests
+pydantic[email]
