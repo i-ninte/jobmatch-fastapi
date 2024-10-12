@@ -1,11 +1,12 @@
 from fastapi import FastAPI, HTTPException, Depends, File, UploadFile, Form
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel, EmailStr
 from passlib.context import CryptContext
-from jose import JWTError, jwt
+from jose import jwt
 from typing import Optional
 from datetime import datetime, timedelta
-from docx import Document  
+from docx import Document
 import os
 import PyPDF2 as pdf
 import google.generativeai as genai
@@ -26,6 +27,15 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # FastAPI app
 app = FastAPI()
+
+# Enable CORS for all origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 @app.get("/")
 def read_root():
