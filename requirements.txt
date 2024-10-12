@@ -8,3 +8,4 @@ python-jose
 google-generativeai
 requests
 pydantic[email]
+python-multipart
