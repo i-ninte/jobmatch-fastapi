@@ -5,7 +5,7 @@ from passlib.context import CryptContext
 from jose import JWTError, jwt
 from typing import Optional
 from datetime import datetime, timedelta
-from docx import Document  # For DOC and DOCX files
+from docx import Document  
 import os
 import PyPDF2 as pdf
 import google.generativeai as genai
@@ -155,7 +155,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
 # PDF, TXT, DOC/DOCX Upload and Processing Route
 @app.post("/upload_resume/")
 async def upload_resume(
-    resume_file: UploadFile = File(None),  # Optional file upload
+    resume_file: UploadFile = File(None),  
     resume_text: Optional[str] = Form(None),  # Optional form input for pasted resume text
     token: str = Depends(oauth2_scheme)
 ):
