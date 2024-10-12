@@ -1,0 +1,8 @@
+fastapi 
+uvicorn
+PyPDF2
+python-docx
+passlib[bcrypt] 
+python-dotenv 
+jose 
+google-generativeai
