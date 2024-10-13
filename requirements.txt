@@ -7,3 +7,7 @@ python-dotenv
 python-jose 
 google-generativeai
 pydantic[email]
+sqlalchemy 
+mysqlclient 
+alembic
+pymysql
