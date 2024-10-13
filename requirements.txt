@@ -6,8 +6,14 @@ passlib[bcrypt]
 python-dotenv 
 python-jose 
 google-generativeai
+<<<<<<< HEAD
 pydantic[email]
 sqlalchemy 
 mysqlclient 
 alembic
 pymysql
+=======
+requests
+pydantic[email]
+python-multipart
+>>>>>>> b1f2b1125eac181c8a48053474267fb1f41b5a4e
