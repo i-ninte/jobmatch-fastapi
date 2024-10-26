@@ -16,4 +16,4 @@ pymysql
 requests
 pydantic[email]
 python-multipart
-
+cryptography

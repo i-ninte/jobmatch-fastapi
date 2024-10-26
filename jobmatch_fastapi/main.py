@@ -39,7 +39,8 @@ app.add_middleware(
     allow_origins=["*"],  # Allows all origins
     allow_credentials=True,
     allow_methods=["*"],  # Allows all HTTP methods
-    allow_headers=["*"],  # Allows all headers
+    allow_headers=["*"], # Allows all headers
+    expose_headers=['*'] # expose all headers
 )
 
 #initialize db
@@ -57,6 +58,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 # Configure the Generative AI API
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
 
 # Models
 class User(BaseModel):
@@ -189,7 +191,7 @@ async def upload_resume(
                 resume_text = await resume_file.read()
                 resume_text = resume_text.decode("utf-8")
             elif resume_file.content_type in [
-                "application/msword",  # .doc
+                "application/msword",  
                 "application/vnd.openxmlformats-officedocument.wordprocessingml.document"  # .docx
             ]:
                 # Extract text from DOC or DOCX resume
@@ -226,7 +228,7 @@ async def match_resume(
 
     Respond with a JSON string structured as follows:
     {{
-        "JD Match": "%",
+        "JDMatch": "%",
         "MissingKeywords": [],
         "ProfileSummary": "",
         "Advice": [],
@@ -241,3 +243,14 @@ async def match_resume(
     result = clean_and_parse_response(response)
     
     return result
+@app.get("/debug_env")
+def debug_env():
+    return {
+        "GOOGLE_API_KEY": os.getenv("GOOGLE_API_KEY"),
+        "JWT_SECRET_KEY": os.getenv("JWT_SECRET_KEY"),
+        "MYSQL_USER": os.getenv("MYSQL_USER"),
+        "MYSQL_PASSWORD": os.getenv("MYSQL_PASSWORD"),
+        "MYSQL_SERVER": os.getenv("MYSQL_SERVER"),
+        "MYSQL_PORT": os.getenv("MYSQL_PORT"),
+        "MYSQL_DB": os.getenv("MYSQL_DB"),
+    }
