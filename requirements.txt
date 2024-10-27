@@ -17,3 +17,4 @@ requests
 pydantic[email]
 python-multipart
 cryptography
+psycopg2-binary 
