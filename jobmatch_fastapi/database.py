@@ -1,36 +1,23 @@
-import os
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env
+# Load environment variables
 load_dotenv()
 
-# MySQL database URL using mysqlclient
-SQLALCHEMY_DATABASE_URL = (
-    
-   ''' f"mysql+pymysql://{os.getenv('MYSQL_USER')}:{os.getenv('MYSQL_PASSWORD')}"
-    f"@{os.getenv('MYSQL_SERVER')}:{os.getenv('MYSQL_PORT')}/{os.getenv('MYSQL_DB')}"
+# Fetch database URL
+SQLALCHEMY_DATABASE_URL = os.getenv("SQLALCHEMY_DATABASE_URL")
+if not SQLALCHEMY_DATABASE_URL:
+    raise ValueError("SQLALCHEMY_DATABASE_URL is not set in the environment variables.")
 
-    
-    '''
-    
-    "postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}"
-    f"@{os.getenv('POSTGRES_SERVER')}:{os.getenv('POSTGRES_PORT')}/{os.getenv('POSTGRES_DB')}")
-
-
-
-# Create SQLAlchemy engine
+# Initialize SQLAlchemy engine
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
-
-# Create session
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-# Base class for models
 Base = declarative_base()
 
-# Dependency to get DB session
+# Dependency function to get a session
 def get_db():
     db = SessionLocal()
     try:

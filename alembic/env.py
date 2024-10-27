@@ -8,11 +8,11 @@ from alembic import context
 # Adding project root to sys.path to make imports work
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-# Import Base from your project
-from jobmatch_fastapi.database import Base  
-
 # Load environment variables from .env
 load_dotenv()
+
+# Import Base from your project (ensure this import path is correct)
+from jobmatch_fastapi.database import Base  
 
 # Alembic Config object, which provides access to .ini file in use.
 config = context.config
@@ -29,11 +29,11 @@ if not database_url:
 
 config.set_main_option('sqlalchemy.url', database_url)
 
-# Interpret the config file for Python logging
+# Interpret the config file for Python logging.
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# Add your model's MetaData object here for 'autogenerate' support
+# Add your model's MetaData object here for 'autogenerate' support.
 target_metadata = Base.metadata
 
 def run_migrations_offline() -> None:

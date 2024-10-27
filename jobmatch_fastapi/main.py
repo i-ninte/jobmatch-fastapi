@@ -243,14 +243,3 @@ async def match_resume(
     result = clean_and_parse_response(response)
     
     return result
-@app.get("/debug_env")
-def debug_env():
-    return {
-        "GOOGLE_API_KEY": os.getenv("GOOGLE_API_KEY"),
-        "JWT_SECRET_KEY": os.getenv("JWT_SECRET_KEY"),
-        "MYSQL_USER": os.getenv("MYSQL_USER"),
-        "MYSQL_PASSWORD": os.getenv("MYSQL_PASSWORD"),
-        "MYSQL_SERVER": os.getenv("MYSQL_SERVER"),
-        "MYSQL_PORT": os.getenv("MYSQL_PORT"),
-        "MYSQL_DB": os.getenv("MYSQL_DB"),
-    }
